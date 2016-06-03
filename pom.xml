@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>com.why</groupId>
-    <artifactId>iSmartWeb</artifactId>
+    <artifactId>ismart-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>web project for iSmart</name>
@@ -13,15 +13,37 @@
     </properties>
     
     <dependencies>
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSP -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- iSmart web framework -->
         <dependency>
             <groupId>com.why</groupId>
-            <artifactId>iSmart</artifactId>
+            <artifactId>ismart</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
     
     <build>
+    <finalName>ismart-web</finalName>
         <pluginManagement>
             <plugins>
                 <!-- Eclipse -->

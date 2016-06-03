@@ -9,9 +9,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.why.domain.Customer;
-import com.why.repo.JdbcHelper;
-import com.why.service.CustomerService;
+import com.why.ismart.framework.util.JdbcUtil;
+import com.why.ismartweb.domain.Customer;
+import com.why.ismartweb.service.CustomerService;
 
 public class CustomerServiceTest {
 
@@ -20,7 +20,7 @@ public class CustomerServiceTest {
     
     @Before
     public void init(){
-        JdbcHelper.executeSqlFile("sql/insert_test_customer.sql");
+        JdbcUtil.executeSqlFile("sql/insert_test_customer.sql");
         System.out.println("init"+count.incrementAndGet());
     }
     
@@ -48,7 +48,7 @@ public class CustomerServiceTest {
         Assert.assertTrue(customerService.createCustomer(fieldMap));
         Customer customer = customerService.findCustomer(3);
         Assert.assertTrue(customer.getContact().equals("为什么"));
-        System.out.println("testCreateCustomer");
+        System.out.println("testCreateCustomer "+customer.getContact());
     }
     
     @Test

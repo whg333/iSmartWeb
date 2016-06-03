@@ -1,4 +1,4 @@
-package com.why.ismart.domain;
+package com.why.ismartweb.domain;
 
 public class Customer {
 
