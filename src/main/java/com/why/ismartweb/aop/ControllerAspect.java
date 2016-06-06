@@ -1,4 +1,4 @@
-package com.why.ismartweb.web.controller;
+package com.why.ismartweb.aop;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import com.why.ismart.framework.aop.Proxy;
 import com.why.ismart.framework.aop.ProxyManager;
 import com.why.ismart.framework.mvc.Controller;
 import com.why.ismart.framework.mvc.Param;
+import com.why.ismartweb.web.controller.CustomerController;
 
 //觉得应该把@Aspect注解直接添加到具体的Controller上，然后value指定处理的AspectProxy
 @Aspect(Controller.class)

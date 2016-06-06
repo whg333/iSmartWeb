@@ -1,4 +1,4 @@
-package com.why.ismart.test;
+package com.why.ismartweb.test;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,27 +8,36 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.why.ismart.framework.Loader;
+import com.why.ismart.framework.ioc.BeanContext;
 import com.why.ismart.framework.util.JdbcUtil;
 import com.why.ismartweb.domain.Customer;
 import com.why.ismartweb.service.CustomerService;
 
 public class CustomerServiceTest {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceTest.class);
 
     private static final AtomicInteger count = new AtomicInteger();
-    private final CustomerService customerService = new CustomerService();
+    
+    private CustomerService customerService;
     
     @Before
     public void init(){
         JdbcUtil.executeSqlFile("sql/insert_test_customer.sql");
-        System.out.println("init"+count.incrementAndGet());
+        LOGGER.info("init count="+count.incrementAndGet());
+        Loader.init();
+        customerService = BeanContext.getBean(CustomerService.class);
     }
     
     @Test
     public void testFindCustomers(){
         List<Customer> customers = customerService.findCustomerList();
         Assert.assertTrue(customers.size() == 2);
-        System.out.println("testFindCustomers");
+        LOGGER.info("testFindCustomers");
     }
     
     @Test
@@ -36,7 +45,7 @@ public class CustomerServiceTest {
         long id = 1;
         Customer customer = customerService.findCustomer(id);
         Assert.assertNotNull(customer);
-        System.out.println("testFindCustomer");
+        LOGGER.info("testFindCustomer");
     }
     
     @Test
@@ -48,7 +57,7 @@ public class CustomerServiceTest {
         Assert.assertTrue(customerService.createCustomer(fieldMap));
         Customer customer = customerService.findCustomer(3);
         Assert.assertTrue(customer.getContact().equals("为什么"));
-        System.out.println("testCreateCustomer "+customer.getContact());
+        LOGGER.info("testCreateCustomer "+customer.getContact());
     }
     
     @Test
@@ -58,7 +67,7 @@ public class CustomerServiceTest {
         fieldMap.put("contact", "Eric");
         boolean result = customerService.updateCustomer(id, fieldMap);
         Assert.assertTrue(result);
-        System.out.println("testUpdateCustomer");
+        LOGGER.info("testUpdateCustomer");
     }
     
     @Test
@@ -66,7 +75,7 @@ public class CustomerServiceTest {
         long id = 1;
         boolean result = customerService.deleteCustomer(id);
         Assert.assertTrue(result);
-        System.out.println("testDeleteCustomer");
+        LOGGER.info("testDeleteCustomer");
     }
     
 }
